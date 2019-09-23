@@ -15,6 +15,8 @@
     if ([UMConfigure respondsToSelector:sel]) {
         [UMConfigure performSelector:sel withObject:@"phonegap" withObject:@"2.0"];
     }
+    NSString * deviceID =[UMConfigure deviceIDForIntegration];
+    NSLog(@"current device id:%@", deviceID);
     [UMConfigure initWithAppkey:appkey channel:channel];
 }
 @end
