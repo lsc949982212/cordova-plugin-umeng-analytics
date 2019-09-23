@@ -82,6 +82,7 @@
 
 - (void)onPageBegin:(CDVInvokedUrlCommand*)command {
     NSString *pageName = [command.arguments objectAtIndex:0];
+    NSLog(@"UMPlugin start page name:%@",pageName);
     if (pageName == nil || [pageName isKindOfClass:[NSNull class]]) {
         return;
     }
@@ -90,6 +91,7 @@
 
 - (void)onPageEnd:(CDVInvokedUrlCommand*)command {
     NSString *pageName = [command.arguments objectAtIndex:0];
+    NSLog(@"UMPlugin end page name:%@",pageName);
     if (pageName == nil || [pageName isKindOfClass:[NSNull class]]) {
         return;
     }

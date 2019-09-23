@@ -16,6 +16,8 @@ import org.apache.cordova.CordovaWebView;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+import com.umeng.commonsdk.UMConfigure;
+
 
 //import com.umeng.analytics.dplus.UMADplus;
 //import com.umeng.analytics.game.UMGameAgent;
@@ -54,6 +56,9 @@ public class AnalyticsSDK extends CordovaPlugin {
     @Override
     public boolean execute(String action, JSONArray args, CallbackContext callbackContext) throws JSONException {
         Log.d("UMPlugin", "execute action:" + action + "|||args:" + args);
+     
+        String[] deviceInfo = UMConfigure.getTestDeviceInfo(mContext);
+        Log.d("UMPlugin","{\"device_id\":\"" + deviceInfo[0] + "\",\"mac\":\"" + deviceInfo[1] + "\"}");
         if (action.equals("onEvent")) {
             String eventId = args.getString(0);
             MobclickAgent.onEvent(mContext, eventId);
@@ -102,11 +107,13 @@ public class AnalyticsSDK extends CordovaPlugin {
             return true;
         } else if (action.equals("onPageBegin")) {
             String pageName = args.getString(0);
+            Log.d("UMPlugin onPageStart page name:", pageName);
             MobclickAgent.onPageStart(pageName);
             return true;
         } else if (action.equals("onPageEnd")) {
             String pageName = args.getString(0);
             MobclickAgent.onPageEnd(pageName);
+            Log.d("UMPlugin onPageEnd page name:", pageName);
             return true;
         } else if (action.equals("getDeviceId")) {
             try {
